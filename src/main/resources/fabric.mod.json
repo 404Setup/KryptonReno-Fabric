@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "fnp_patcher",
+  "version": "${version}",
+  "name": "FNP Patcher",
+  "description": "Optimize the network and provide additional support for Krypton Fabric.",
+  "authors": ["404"],
+  "contact": {
+    "issues": "https://github.com/404Setup/FNP-Patcher/issues",
+    "sources": "https://github.com/404Setup/FNP-Patcher",
+    "homepage": "https://modrinth.com/mod/kryptonfnp-patcher"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/fnp_patcher/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "one.pkg.fnp_patcher.ModMain"
+    ]
+  },
+  "mixins": [
+    "fnp_patcher.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": ">=${minecraft_version}"
+  }
+}
