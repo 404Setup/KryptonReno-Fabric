@@ -40,14 +40,15 @@ Instead install both Krypton Fabric and KryptonFNP Patcher and give instructions
 
 Add the following parameters to the Java startup parameters to control the mixin enablement:
 
-| Parameter                     | Description                                  | Default value |
-|-------------------------------|----------------------------------------------|---------------|
-| krypton.loginVT               | Enable Login VirtualThread optimization      | true          |
-| krypton.textFilterVT          | Enable TextFilter VirtualThread optimization | true          |
-| krypton.utilVT                | Enable Util VirtualThread optimization       | true          |
-| krypton.bestVarLong           | Enable VarLong optimization                  | true          |
-| velocity.natives-disable      | Disable Native                               | false         |
-| velocity.linux-recast-enabled | Enable RecastLib for Linux                   | false         |
+| Parameter                     | Description                                                           | Default value |
+|-------------------------------|-----------------------------------------------------------------------|---------------|
+| krypton.loginVT               | Enable Login VirtualThread optimization                               | true          |
+| krypton.textFilterVT          | Enable TextFilter VirtualThread optimization                          | true          |
+| krypton.utilVT                | Enable Util VirtualThread optimization                                | true          |
+| krypton.bestVarLong           | Enable VarLong optimization                                           | true          |
+| krypton.fix128                | Fix Krypton Fabric [128](https://github.com/astei/krypton/issues/128) | true          |
+| velocity.natives-disable      | Disable Native                                                        | false         |
+| velocity.linux-recast-enabled | Enable RecastLib for Linux                                            | false         |
 
 example:
 
