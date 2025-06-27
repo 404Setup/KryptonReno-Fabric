@@ -2,6 +2,17 @@
 
 This is an extension mod for Krypton Fabric, ported from KryptonFNP.
 
+$\color{Red}\Huge{\textbf{You should not include }}$
+$\color{Red}\Huge{\textbf{the }}$
+$\color{Gold}\Huge{\textbf{modified }}$
+$\color{Red}\Huge{\textbf{Krypton Fabric }}$
+$\color{Red}\Huge{\textbf{in your modpack!}}$
+
+$\color{Red}\Huge{\textbf{Instead install both }}$
+$\color{Red}\Huge{\textbf{Krypton Fabric and KryptonFNP }}$
+$\color{Red}\Huge{\textbf{Patcher and give instructions}}$
+$\color{Red}\Huge{\textbf{ on how to use them.}}$
+
 ## Feature
 
 - More basic optimizations
@@ -31,10 +42,6 @@ Velocity Native.
 
 When performing the patch operation, you need to close the running game and make sure that no other processes are
 occupying the Mods directory.
-
-You should not include the modified Krypton Fabric in your modpack!
-
-Instead install both Krypton Fabric and KryptonFNP Patcher and give instructions on how to use them.
 
 ## Config
 
