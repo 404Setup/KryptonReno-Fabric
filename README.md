@@ -40,15 +40,15 @@ Instead install both Krypton Fabric and KryptonFNP Patcher and give instructions
 
 Add the following parameters to the Java startup parameters to control the mixin enablement:
 
-| Parameter                     | Description                                                           | Default value |
-|-------------------------------|-----------------------------------------------------------------------|---------------|
-| krypton.loginVT               | Enable Login VirtualThread optimization                               | true          |
-| krypton.textFilterVT          | Enable TextFilter VirtualThread optimization                          | true          |
-| krypton.utilVT                | Enable Util VirtualThread optimization                                | true          |
-| krypton.bestVarLong           | Enable VarLong optimization                                           | true          |
-| krypton.fix128                | Fix Krypton Fabric [128](https://github.com/astei/krypton/issues/128) | true          |
-| velocity.natives-disable      | Disable Native                                                        | false         |
-| velocity.linux-recast-enabled | Enable RecastLib for Linux                                            | false         |
+| Parameter                     | Description                                                           | Default value | Configuration in file form |
+|-------------------------------|-----------------------------------------------------------------------|---------------|----------------------------|
+| krypton.loginVT               | Enable Login VirtualThread optimization                               | true          | Support                    |
+| krypton.textFilterVT          | Enable TextFilter VirtualThread optimization                          | true          | Support                    |
+| krypton.utilVT                | Enable Util VirtualThread optimization                                | true          | Support                    |
+| krypton.bestVarLong           | Enable VarLong optimization                                           | true          | Support                    |
+| krypton.fix128                | Fix Krypton Fabric [128](https://github.com/astei/krypton/issues/128) | true          | Support                    |
+| velocity.natives-disable      | Disable Native                                                        | false         | Not supported              |
+| velocity.linux-recast-enabled | Enable RecastLib for Linux                                            | false         | Not supported              |
 
 example:
 
@@ -63,6 +63,15 @@ Some configuration items support using environment variables instead of jvm args
 | JVM ARGS                      | Environment Variable |
 |-------------------------------|----------------------|
 | velocity.linux-recast-enabled | ENABLE_LINUX_RECAST  |
+
+## Dependencies
+- [Krypton Fabric](https://modrinth.com/mod/krypton) - Optional dependency. I put some optimizations here.
+- [Resource Config API](https://modrinth.com/mod/resource-config-api) - Required dependencies. Configuration GUI and config file capabilities are provided by this mod.
+
+## Translate
+This doesn't take much time, you just need to tell me what language is missing.
+
+It works in the Config GUI.
 
 ## License
 

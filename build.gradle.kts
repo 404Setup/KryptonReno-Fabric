@@ -14,6 +14,7 @@ loom.mixin.defaultRefmapName.set("fnp_patcher.refmap.json")
 
 repositories {
     mavenCentral()
+    maven("https://api.modrinth.com/maven")
     maven("https://github.com/404Setup/VelocityNT-Recast/raw/refs/heads/dev/3.0.0/m2/") {
         name = "VelocityRecast"
     }
@@ -24,6 +25,7 @@ dependencies {
     mappings(loom.officialMojangMappings())
     //mappings("net.fabricmc:yarn:${project.property("yarn_mappings")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
+    modImplementation("maven.modrinth:resource-config-api:1.21.6-3.7.0-fabric")
 
     //include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.3")!!)!!)
     include(implementation("one.pkg.velocity_rc:velocity-native:3.4.0-SNAPSHOT")!!)

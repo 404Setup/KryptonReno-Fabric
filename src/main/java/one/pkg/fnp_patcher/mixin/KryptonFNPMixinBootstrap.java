@@ -1,6 +1,7 @@
 package one.pkg.fnp_patcher.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
+import one.pkg.fnp_patcher.util.PatcherModConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.objectweb.asm.tree.ClassNode;
@@ -9,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Set;
 
@@ -57,25 +60,58 @@ public class KryptonFNPMixinBootstrap implements IMixinConfigPlugin {
     }
 
     enum CONFIG {
-        Login_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerLoginPacketListenerImplMixin", "krypton.loginVT"),
-        TextFilter_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerTextFilterMixin", "krypton.textFilterVT"),
-        Util_VT("one.pkg.fnp_patcher.mixin.network.experimental.UtilMixin", "krypton.utilVT"),
-        BestVarLong("one.pkg.fnp_patcher.mixin.network.experimental.VarLongMixin", "krypton.bestVarLong"),
-        KryptonFix128("one.pkg.fnp_patcher.mixin.network.fix.Varint21FrameDecoderMixin", "krypton.fix128", "krypton"),
+        Login_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerLoginPacketListenerImplMixin", "krypton.loginVT", getField("loginVT")),
+        TextFilter_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerTextFilterMixin", "krypton.textFilterVT", getField("textFilterVT")),
+        Util_VT("one.pkg.fnp_patcher.mixin.network.experimental.UtilMixin", "krypton.utilVT", getField("utilVT")),
+        BestVarLong("one.pkg.fnp_patcher.mixin.network.experimental.VarLongMixin", "krypton.bestVarLong", getField("bestVarLong")),
+        KryptonFix128("one.pkg.fnp_patcher.mixin.network.fix.Varint21FrameDecoderMixin", "krypton.fix128", getField("kryptonIssues128"), "krypton"),
         ;
 
         public final String CLASS;
         public final String ENV;
         public final boolean hasMod;
+        public final Field configTarget;
 
-        CONFIG(String clazz, String env) {
-            this(clazz, env, null);
+        CONFIG(String clazz, String env, @Nullable Field configTarget) {
+            this(clazz, env, configTarget, null);
         }
 
-        CONFIG(String clazz, String env, @NotNull String modid) {
+        CONFIG(String clazz, String env, @Nullable Field configTarget, @NotNull String modid) {
             this.CLASS = clazz;
             this.ENV = env;
+            this.configTarget = configTarget;
             this.hasMod = modid != null ? FabricLoader.getInstance().isModLoaded(modid) : true;
+        }
+
+        private static Field getField(@NotNull String fieldName) {
+            try {
+                var field = PatcherModConfig.class.getDeclaredField(fieldName);
+                if (!Modifier.isStatic(field.getModifiers()))
+                    throw new IllegalArgumentException("Field " + fieldName + " is not static.");
+                field.setAccessible(true);
+                return field;
+            } catch (NoSuchFieldException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        private static @Nullable Object getFieldValue(@NotNull Field field) {
+            try {
+                return field.get(null);
+            } catch (IllegalAccessException e) {
+                return null;
+            }
+        }
+
+        private static boolean getBooleanValue(@NotNull Field field) {
+            var value = getFieldValue(field);
+            if (value instanceof Boolean b) {
+                return b;
+            } else if (value instanceof String s) {
+                return Boolean.parseBoolean(s);
+            } else {
+                return false;
+            }
         }
 
         @Nullable
@@ -89,7 +125,7 @@ public class KryptonFNPMixinBootstrap implements IMixinConfigPlugin {
         }
 
         public boolean isEnabled() {
-            return Boolean.parseBoolean(System.getProperty(ENV, "true"));
+            return this.hasMod && (getBooleanValue(this.configTarget) || Boolean.parseBoolean(System.getProperty(ENV, "true")));
         }
     }
 }

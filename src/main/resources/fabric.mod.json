@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "FNP Patcher",
   "description": "Optimize the network and provide additional support for Krypton Fabric.",
-  "authors": ["404"],
+  "authors": [
+    "404"
+  ],
   "contact": {
     "issues": "https://github.com/404Setup/FNP-Patcher/issues",
     "sources": "https://github.com/404Setup/FNP-Patcher",
@@ -24,6 +26,10 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": ">=${minecraft_version}"
+    "minecraft": ">=${minecraft_version}",
+    "resourceconfigapi": "*"
+  },
+  "suggests": {
+    "krypton": "*"
   }
 }

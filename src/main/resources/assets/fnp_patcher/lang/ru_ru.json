@@ -1,0 +1,12 @@
+{
+  "config.fnp_patcher.patchermod_config": "Patcher Mod",
+
+  "config.fnp_patcher.patchermod_config.general.label": "Mixin",
+  "config.fnp_patcher.patchermod_config.bugfix.label": "Исправление ошибок",
+
+  "config.fnp_patcher.patchermod_config.bestvarlong.label": "Оптимизированная реализация VarLong (требуется перезагрузка)",
+  "config.fnp_patcher.patchermod_config.utilvt.label": "Заменить поток загрузки на виртуальный поток (требуется перезагрузка)",
+  "config.fnp_patcher.patchermod_config.loginvt.label": "Заменить поток проверки при входе игрока на виртуальный поток (требуется перезагрузка)",
+  "config.fnp_patcher.patchermod_config.textfiltervt.label": "Заменить поток фильтрации текста на виртуальный поток (требуется перезагрузка)",
+  "config.fnp_patcher.patchermod_config.kryptonissues128.label": "Исправить проблему с отображением трафика в F3, вызванную оптимизацией Krypton (требуется перезагрузка)"
+}
