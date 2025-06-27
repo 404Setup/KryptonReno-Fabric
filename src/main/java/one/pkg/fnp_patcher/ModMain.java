@@ -9,6 +9,17 @@ public class ModMain implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        safetyCheck();
+
         ConfigRegistry.register(PatcherModConfig.class, MOD_ID);
+    }
+
+    // This is a deliberate check.
+    protected void safetyCheck() {
+        try {
+            Class.forName("org.bukkit.advancement.Advancement");
+            throw new SecurityException("Unsupported mod detected: bukkit");
+        } catch (ClassNotFoundException ignored) {
+        }
     }
 }

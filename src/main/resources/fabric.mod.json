@@ -31,5 +31,11 @@
   },
   "suggests": {
     "krypton": "*"
+  },
+  "breaks": {
+    "arclight": "*",
+    "banner-launcher": "*",
+    "cardboard": "*",
+    "mohist": "*"
   }
 }
