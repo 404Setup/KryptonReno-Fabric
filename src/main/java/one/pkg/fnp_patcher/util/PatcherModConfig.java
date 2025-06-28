@@ -18,7 +18,4 @@ public class PatcherModConfig {
 
     @ConfigEntry(category = "General")
     public static boolean textFilterVT = true;
-
-    @ConfigEntry(category = "BugFix")
-    public static boolean kryptonIssues128 = false;
 }

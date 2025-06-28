@@ -64,7 +64,7 @@ public class KryptonFNPMixinBootstrap implements IMixinConfigPlugin {
         TextFilter_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerTextFilterMixin", "krypton.textFilterVT", getField("textFilterVT")),
         Util_VT("one.pkg.fnp_patcher.mixin.network.experimental.UtilMixin", "krypton.utilVT", getField("utilVT")),
         BestVarLong("one.pkg.fnp_patcher.mixin.network.experimental.VarLongMixin", "krypton.bestVarLong", getField("bestVarLong")),
-        KryptonFix128("one.pkg.fnp_patcher.mixin.network.fix.Varint21FrameDecoderMixin", "krypton.fix128", getField("kryptonIssues128"), "krypton"),
+        //KryptonFix128("one.pkg.fnp_patcher.mixin.network.fix.Varint21FrameDecoderMixin", "krypton.fix128", getField("kryptonIssues128"), "krypton"),
         ;
 
         public final String CLASS;
