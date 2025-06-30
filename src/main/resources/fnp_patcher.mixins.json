@@ -9,8 +9,7 @@
     "network.experimental.ServerLoginPacketListenerImplMixin",
     "network.experimental.ServerTextFilterMixin",
     "network.experimental.UtilMixin",
-    "network.experimental.VarLongMixin",
-    "network.fix.Varint21FrameDecoderMixin"
+    "network.experimental.VarLongMixin"
   ],
   "client": [
   ],
