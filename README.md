@@ -5,11 +5,11 @@ This is an extension mod for Krypton Fabric, ported from KryptonFNP.
 $\color{Red}\Huge{\textbf{You should not include }}$
 $\color{Red}\Huge{\textbf{the }}$
 $\color{Gold}\Huge{\textbf{modified }}$
-$\color{Red}\Huge{\textbf{Krypton Fabric }}$
+$\color{Red}\Huge{\textbf{Krypton Fabric/PaperServer }}$
 $\color{Red}\Huge{\textbf{in your modpack!}}$
 
 $\color{Red}\Huge{\textbf{Instead install both }}$
-$\color{Red}\Huge{\textbf{Krypton Fabric and KryptonFNP }}$
+$\color{Red}\Huge{\textbf{Krypton Fabric/PaperServer and KryptonFNP }}$
 $\color{Red}\Huge{\textbf{Patcher and give instructions}}$
 $\color{Red}\Huge{\textbf{ on how to use them.}}$
 
@@ -18,14 +18,23 @@ $\color{Red}\Huge{\textbf{ on how to use them.}}$
 - More basic optimizations
 - Support RecastLib (Velocity Native rewritten in Rust, compatible with Windows x64/arm64)
 
-## Install as a Mod
+## Warning
+- When performing the patch operation, you need to close the running game and make sure that no other processes are occupying the Mods directory.
+- For PluginServer Patch, FNP Patcher supports all Papers and Paper Forks.
+- Distributing FNP Patcher by any means other than Modpack is prohibited. See LICENSE for details.
+- It is forbidden to distribute the products of FNP Patcher in any way, such as Krypton Fabric Patched or PaperLike Patched
+- Prohibition of monetization
+
+## Install
+
+### Install as a Mod
 
 Just install it normally.
 
 In addition, KryptonFNP Patcher also includes a repair patch for Krypton Fabric, which will be automatically applied
 when Krypton Fabric is detected to be installed. (You can turn it off manually)
 
-## Installed as a patch for Krypton Fabric
+### Installed as a patch for Krypton Fabric
 
 KryptonFNP PatcherIn order to implement Krypton Patch, the patch must be executed in the following way:
 
@@ -38,10 +47,12 @@ KryptonFNP PatcherIn order to implement Krypton Patch, the patch must be execute
 This will replace the Velocity Native included in Krypton Fabric with a native library that mixes RecastLib with
 Velocity Native.
 
-## Warning
+### Installed as a patch for PaperServer
 
-When performing the patch operation, you need to close the running game and make sure that no other processes are
-occupying the Mods directory.
+1. Download the latest version of KryptonFNP Patcher from Modrinth or Curseforge and put it in your Paper server root directory (along with the .jar file that starts the server)
+2. Open Terminal
+3. Use command: `java -jar kryptonfnp_patcher.jar` (Please use actual file names!)
+4. Done
 
 ## Config
 
@@ -49,18 +60,13 @@ Add the following parameters to the Java startup parameters to control the mixin
 
 | Parameter                     | Description                                                           | Default value | Configuration in file form |
 |-------------------------------|-----------------------------------------------------------------------|---------------|----------------------------|
-| krypton.loginVT               | Enable Login VirtualThread optimization                               | true          | Support                    |
-| krypton.textFilterVT          | Enable TextFilter VirtualThread optimization                          | true          | Support                    |
-| krypton.utilVT                | Enable Util VirtualThread optimization                                | true          | Support                    |
-| krypton.bestVarLong           | Enable VarLong optimization                                           | true          | Support                    |
-| krypton.fix128                | Fix Krypton Fabric [128](https://github.com/astei/krypton/issues/128) | true          | Support                    |
 | velocity.natives-disable      | Disable Native                                                        | false         | Not supported              |
 | velocity.linux-recast-enabled | Enable RecastLib for Linux                                            | false         | Not supported              |
 
 example:
 
 ```shell
-java -Dkrypton.loginVT=false -jar neoforge_launcher.jar
+java -Dvelocity.linux-recast-enabled=true -jar neoforge_launcher.jar
 ```
 
 ### Use env instead of jvm args
