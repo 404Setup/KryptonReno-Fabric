@@ -79,12 +79,6 @@ Some configuration items support using environment variables instead of jvm args
 
 ## Dependencies
 - [Krypton Fabric](https://modrinth.com/mod/krypton) - Optional dependency. I put some optimizations here.
-- [Resource Config API](https://modrinth.com/mod/resource-config-api) - Required dependencies. Configuration GUI and config file capabilities are provided by this mod.
-
-## Translate
-This doesn't take much time, you just need to tell me what language is missing.
-
-It works in the Config GUI.
 
 ## License
 Partially used code from [PaperMC/Paperclip](https://github.com/PaperMC/Paperclip) to use it as PluginServer Patcher. 

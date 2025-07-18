@@ -1,7 +1,7 @@
 package one.pkg.fnp_patcher.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
-import one.pkg.fnp_patcher.util.PatcherModConfig;
+import one.pkg.fnp_patcher.ModConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.objectweb.asm.tree.ClassNode;
@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Set;
 
@@ -64,7 +63,7 @@ public class KryptonFNPMixinBootstrap implements IMixinConfigPlugin {
         TextFilter_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerTextFilterMixin", "krypton.textFilterVT", getField("textFilterVT")),
         Util_VT("one.pkg.fnp_patcher.mixin.network.experimental.UtilMixin", "krypton.utilVT", getField("utilVT")),
         BestVarLong("one.pkg.fnp_patcher.mixin.network.experimental.VarLongMixin", "krypton.bestVarLong", getField("bestVarLong")),
-        KryptonFix128("one.pkg.fnp_patcher.mixin.network.fix.Varint21FrameDecoderMixin", "krypton.fix128", getField("kryptonIssues128"), "krypton"),
+        KryptonFix128("one.pkg.fnp_patcher.mixin.network.fix.Varint21FrameDecoderMixin", "krypton.fix128", getField("issues128"), "krypton"),
         ;
 
         public final String CLASS;
@@ -85,9 +84,7 @@ public class KryptonFNPMixinBootstrap implements IMixinConfigPlugin {
 
         private static Field getField(@NotNull String fieldName) {
             try {
-                var field = PatcherModConfig.class.getDeclaredField(fieldName);
-                if (!Modifier.isStatic(field.getModifiers()))
-                    throw new IllegalArgumentException("Field " + fieldName + " is not static.");
+                Field field = ModConfig.INSTANCE.getClass().getDeclaredField(fieldName);
                 field.setAccessible(true);
                 return field;
             } catch (NoSuchFieldException e) {
@@ -97,7 +94,7 @@ public class KryptonFNPMixinBootstrap implements IMixinConfigPlugin {
 
         private static @Nullable Object getFieldValue(@NotNull Field field) {
             try {
-                return field.get(null);
+                return field.get(ModConfig.INSTANCE);
             } catch (IllegalAccessException e) {
                 return null;
             }

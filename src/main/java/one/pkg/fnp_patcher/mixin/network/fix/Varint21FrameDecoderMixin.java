@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.BandwidthDebugMonitor;
 import net.minecraft.network.VarInt;
 import net.minecraft.network.Varint21FrameDecoder;
+import one.pkg.fnp_patcher.ModConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -43,6 +44,7 @@ public class Varint21FrameDecoderMixin {
 
     @Unique
     private void fnp_patcher$execute(int l) {
-        this.fnp_patcher$executor.execute(() -> this.monitor.onReceive(l + VarInt.getByteSize(l)));
+        if (ModConfig.INSTANCE.isIssues128Sync()) this.monitor.onReceive(l + VarInt.getByteSize(l));
+        else this.fnp_patcher$executor.execute(() -> this.monitor.onReceive(l + VarInt.getByteSize(l)));
     }
 }
