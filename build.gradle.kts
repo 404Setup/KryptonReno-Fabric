@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "1.10-SNAPSHOT"
+    id("fabric-loom") version "1.11-SNAPSHOT"
     id("maven-publish")
 }
 
@@ -15,7 +15,7 @@ loom.mixin.defaultRefmapName.set("fnp_patcher.refmap.json")
 
 repositories {
     mavenCentral()
-    maven("https://github.com/404Setup/VelocityNT-Recast/raw/refs/heads/dev/3.0.0/m2/") {
+    maven("https://github.com/404Setup/VelocityNT-Recast/raw/refs/heads/dev/22/m2/") {
         name = "VelocityRecast"
     }
     maven("https://jitpack.io")
@@ -59,11 +59,12 @@ tasks.processResources {
     }
 }
 
-val targetJavaVersion = 21
+val targetJavaVersion = 22
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible) {
         options.release.set(targetJavaVersion)
+        options.compilerArgs = options.compilerArgs + listOf("--enable-preview")
     }
 }
 
