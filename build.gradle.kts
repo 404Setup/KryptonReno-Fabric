@@ -28,6 +28,7 @@ dependencies {
 
     //include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.3")!!)!!)
     include(implementation("one.pkg.velocity_rc:velocity-native:3.4.0-SNAPSHOT")!!)
+    include(implementation("org.yaml:snakeyaml:2.4")!!)
     include(implementation("one.pkg:sewlia-config:${config_api_version}") {
         exclude(group = "org.yaml")
         exclude(group = "org.slf4j")
