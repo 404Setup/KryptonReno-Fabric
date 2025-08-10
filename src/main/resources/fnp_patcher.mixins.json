@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "one.pkg.fnp_patcher.mixin",
   "refmap": "fnp_patcher.refmap.json",
-  "plugin": "one.pkg.fnp_patcher.mixin.KryptonFNPMixinBootstrap",
+  "plugin": "one.pkg.fnp_patcher.mixin.ModMixinBootstrap",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "network.experimental.ServerLoginPacketListenerImplMixin",

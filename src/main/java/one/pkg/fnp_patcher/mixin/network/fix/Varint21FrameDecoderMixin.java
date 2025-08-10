@@ -44,7 +44,7 @@ public class Varint21FrameDecoderMixin {
 
     @Unique
     private void fnp_patcher$execute(int l) {
-        if (ModConfig.INSTANCE.isIssues128Sync()) this.monitor.onReceive(l + VarInt.getByteSize(l));
+        if (ModConfig.Fix.Issues128.isSync()) this.monitor.onReceive(l + VarInt.getByteSize(l));
         else this.fnp_patcher$executor.execute(() -> this.monitor.onReceive(l + VarInt.getByteSize(l)));
     }
 }

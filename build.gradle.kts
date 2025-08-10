@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "1.10-SNAPSHOT"
+    id("fabric-loom") version "1.11-SNAPSHOT"
     id("maven-publish")
 }
 
@@ -15,8 +15,8 @@ loom.mixin.defaultRefmapName.set("fnp_patcher.refmap.json")
 
 repositories {
     mavenCentral()
-    maven("https://github.com/404Setup/VelocityNT-Recast/raw/refs/heads/dev/3.0.0/m2/") {
-        name = "VelocityRecast"
+    maven("https://mvn.pkg.one/snapshots") {
+        name = "OneSnapshot"
     }
     maven("https://jitpack.io")
 }
@@ -27,18 +27,10 @@ dependencies {
     //mappings("net.fabricmc:yarn:${project.property("yarn_mappings")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
     include(implementation("one.pkg.velocity_rc:velocity-native:3.4.0-SNAPSHOT")!!)
-    include(implementation("com.google.auto.service:auto-service-annotations:1.1.1") {
-        exclude(group = "com.google.guava")
-        exclude(group = "org.checkerframework")
-    })
-    include(implementation("com.google.auto.service:auto-service:1.1.1") {
-        exclude(group = "com.google.guava")
-        exclude(group = "org.checkerframework")
-    })
     include(implementation("org.yaml:snakeyaml:2.4")!!)
-    include(implementation("com.github.bsommerfeld.jshepherd:core:$config_api_version")!!)
-    include(implementation("com.github.bsommerfeld.jshepherd:yaml:$config_api_version") {
+    include(implementation("one.pkg:sewlia-config:${config_api_version}") {
         exclude(group = "org.yaml")
+        exclude(group = "org.slf4j")
     })
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
