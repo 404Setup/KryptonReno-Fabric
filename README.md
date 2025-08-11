@@ -1,5 +1,12 @@
 # FNP Patcher
 
+[![](https://badges.moddingx.org/modrinth/downloads/kryptonfnp-patcher)](https://modrinth.com/mod/kryptonfnp-patcher)
+[![](https://badges.moddingx.org/curseforge/downloads/1294543)](https://www.curseforge.com/minecraft/mc-mods/kryptonfnp-patcher)
+
+[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/kryptonfnp-patcher)
+[![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/kryptonfnp-patcher)
+[![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/github_vector.svg)](https://github.com/404Setup/FNP-Patcher)
+
 This is an extension mod for Krypton Fabric, ported from KryptonFNP.
 
 $\color{Red}\Huge{\textbf{You should not include }}$
