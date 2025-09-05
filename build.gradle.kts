@@ -15,7 +15,7 @@ loom.mixin.defaultRefmapName.set("fnp_patcher.refmap.json")
 
 repositories {
     mavenCentral()
-    maven("https://mvn.pkg.one/snapshots") {
+    maven("https://mvnc.pkg.one/snapshots") {
         name = "OneSnapshot"
     }
     maven("https://jitpack.io")
