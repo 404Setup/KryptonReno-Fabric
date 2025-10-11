@@ -212,7 +212,7 @@ public class PKMain {
     private enum PKType {
         ModServer,
         PluginServer,
-        UNKNOWN;
+        UNKNOWN
     }
 
     private record PKEntry(File jarFile, PKType type) {
