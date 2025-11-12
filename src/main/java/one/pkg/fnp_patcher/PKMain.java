@@ -3,10 +3,10 @@ package one.pkg.fnp_patcher;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -43,13 +43,14 @@ public class PKMain {
     }
 
     private static void patchJarFiles(File targetJar) throws IOException {
-        String jarPath = PKMain.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        URL location = PKMain.class.getProtectionDomain().getCodeSource().getLocation();
+        File currentJar;
         try {
-            jarPath = URLDecoder.decode(jarPath, StandardCharsets.UTF_8);
+            var uri = location.toURI();
+            currentJar = Paths.get(uri).toFile();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            currentJar = new File(location.getPath());
         }
-        File currentJar = new File(jarPath);
         File tempFile = new File(targetJar.getParent(), targetJar.getName() + ".tmp");
 
         try (JarFile sourceJar = new JarFile(currentJar);
