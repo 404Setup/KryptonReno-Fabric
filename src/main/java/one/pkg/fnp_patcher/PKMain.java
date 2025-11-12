@@ -5,10 +5,11 @@ import io.papermc.paperclip.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLDecoder;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -73,8 +74,7 @@ public class PKMain {
         return new PKEntry(null, PKType.UNKNOWN);
     }
 
-    private static void patchModServer(String jarPath, File targetJar) throws IOException {
-        File currentJar = new File(jarPath);
+    private static void patchModServer(File currentJar, File targetJar) throws IOException {
         File tempFile = new File(targetJar.getParent(), targetJar.getName() + ".tmp");
 
         try (JarFile sourceJar = new JarFile(currentJar);
@@ -113,8 +113,7 @@ public class PKMain {
         Files.move(tempFile.toPath(), targetJar.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
-    private static void patchPluginServer(String jarPath, File targetJar) throws IOException {
-        File currentJar = new File(jarPath);
+    private static void patchPluginServer(File currentJar, File targetJar) throws IOException {
         File tempFile = new File(targetJar.getParent(), targetJar.getName() + ".tmp");
 
         try (JarFile sourceJar = new JarFile(currentJar);
@@ -180,17 +179,19 @@ public class PKMain {
     }
 
     private static void patchJarFiles(PKEntry target) throws IOException {
-        String jarPath = PKMain.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        URL location = PKMain.class.getProtectionDomain().getCodeSource().getLocation();
+        File currentJar;
         try {
-            jarPath = URLDecoder.decode(jarPath, StandardCharsets.UTF_8);
+            var uri = location.toURI();
+            currentJar = Paths.get(uri).toFile();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            currentJar = new File(location.getPath());
         }
 
         if (target.type == PKType.ModServer) {
-            patchModServer(jarPath, target.jarFile);
+            patchModServer(currentJar, target.jarFile);
         } else if (target.type == PKType.PluginServer) {
-            patchPluginServer(jarPath, target.jarFile);
+            patchPluginServer(currentJar, target.jarFile);
         }
     }
 
