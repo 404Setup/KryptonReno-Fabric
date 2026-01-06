@@ -1,7 +1,7 @@
 ## FNP Patcher JavaAgent
 
-This is the JavaAgent version of FNP Patcher. Due to review policies, 
-this component cannot be published on Modrinth and CurseForge, 
+This is the JavaAgent version of FNP Patcher. Due to review policies,
+this component cannot be published on Modrinth and CurseForge,
 so you cannot include it in any Modpack.
 
 ----
@@ -19,10 +19,7 @@ $\color{Red}\Huge{\textbf{ on how to use them.}}$
 
 ## Warning
 
-- When performing the patch operation, you need to close the running game and make sure that no other processes are
-  occupying the Mods directory.
-- For PluginServer Patch, FNP Patcher supports all Papers and Paper Forks.
-- Distributing FNP Patcher by any means other than Modpack is prohibited. See LICENSE for details.
+- It is forbidden to distribute FNP Patcher Agent in any way
 - It is forbidden to distribute the products of FNP Patcher in any way, such as Krypton Fabric Patched or PaperLike
   Patched
 - Prohibition of monetization
@@ -36,10 +33,15 @@ Native replacement is only compatible with Velocity version 3.2.0-SNAPSHOT and l
 ### Javaagent
 
 > **About Fabric Loader**:
+>
 > Compatible range: 0.17.2 - 0.18.4, other versions untested but theoretically compatible.
+>
 > Quilt compatibility is unknown. May conflict with some anti-cheat implementations, use with caution.
+>
 > **About PaperServer**
+>
 > Only applicable to server implementations that do not use the Paperclip fork
+>
 > Incompatible with other PaperClip forks due to package name changes and other unknown modifications.
 
 Javaagent mode allows dynamic Native replacement without modifying Krypton Fabric.
@@ -54,11 +56,17 @@ Javaagent mode allows dynamic Native replacement without modifying Krypton Fabri
 ### Patcher (Deprecated)
 
 > Patcher mode will be deprecated soon, expected to fully transition to Javaagent mode starting from version 26.2
+>
+> When performing the patch operation, you need to close the running game and make sure that no other processes are
+> occupying the Mods directory.
 
 1. Install FNP Patcher JavaAgent and Paper Server/Krypton Fabric in the same directory
 2. Open Terminal
 3. Use command: `java -jar kryptonfnp_patcher.jar` (Please use actual file names!)
 4. Done
+
+## Download
+Github Release
 
 ## Credit
 
