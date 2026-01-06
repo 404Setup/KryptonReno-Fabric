@@ -23,52 +23,62 @@ $\color{Red}\Huge{\textbf{ on how to use them.}}$
 ## Feature
 
 - More basic optimizations
-- Support RecastLib (Velocity Native rewritten in Rust, compatible with Windows x64/arm64)
+- RecastLib provides acceleration features for **Windows** (x64/arm64)
 
 ## Warning
-- When performing the patch operation, you need to close the running game and make sure that no other processes are occupying the Mods directory.
+
+- When performing the patch operation, you need to close the running game and make sure that no other processes are
+  occupying the Mods directory.
 - For PluginServer Patch, FNP Patcher supports all Papers and Paper Forks.
 - Distributing FNP Patcher by any means other than Modpack is prohibited. See LICENSE for details.
-- It is forbidden to distribute the products of FNP Patcher in any way, such as Krypton Fabric Patched or PaperLike Patched
+- It is forbidden to distribute the products of FNP Patcher in any way, such as Krypton Fabric Patched or PaperLike
+  Patched
 - Prohibition of monetization
 
 ## Install
 
-### Install as a Mod
+Patcher and Javaagent are currently incompatible with servers using the Paperclip fork.
 
-Just install it normally.
+Native replacement is only compatible with Velocity version 3.2.0-SNAPSHOT and later.
 
-In addition, KryptonFNP Patcher also includes a repair patch for Krypton Fabric, which will be automatically applied
-when Krypton Fabric is detected to be installed. (You can turn it off manually)
+### Javaagent
 
-### Installed as a patch for Krypton Fabric
+> **About Fabric Loader**:
+> Compatible range: 0.17.2 - 0.18.4, other versions untested but theoretically compatible.
+> Quilt compatibility is unknown. May conflict with some anti-cheat implementations, use with caution.
+> **About PaperServer**
+> Only applicable to server implementations that do not use the Paperclip fork
+> Incompatible with other PaperClip forks due to package name changes and other unknown modifications.
 
-KryptonFNP PatcherIn order to implement Krypton Patch, the patch must be executed in the following way:
+Javaagent mode allows dynamic Native replacement without modifying Krypton Fabric.
 
-1. Install Krypton Fabric and KyrptonFNP Patcher as a Mod
-2. Enter the Mod installation directory
-3. Open Terminal
-4. Use command: `java -jar kryptonfnp_patcher.jar` (Please use actual file names!)
-5. Done
+**Installation**:
 
-This will replace the Velocity Native included in Krypton Fabric with a native library that mixes RecastLib with
-Velocity Native.
+1. Download FNP Patcher
+2. Place it in the game root directory (not the mods directory)
+3. Modify the game launch configuration, add `-javaagent:fnp_patcher.jar` to the JVM startup arguments
+4. Launch the game
 
-### Installed as a patch for PaperServer
+### Patcher (Deprecated)
 
-1. Download the latest version of KryptonFNP Patcher from Modrinth or Curseforge and put it in your Paper server root directory (along with the .jar file that starts the server)
+> Patcher mode will be deprecated soon, expected to fully transition to Javaagent mode starting from version 26.2
+
+1. Install FNP Patcher and Paper Server/Krypton Fabric in the same directory
 2. Open Terminal
 3. Use command: `java -jar kryptonfnp_patcher.jar` (Please use actual file names!)
 4. Done
+
+### Base Mod
+
+Base Mod mode can only run in a Fabric environment and can be installed alongside Krypton Fabric (optional).
 
 ## Config
 
 Add the following parameters to the Java startup parameters to control the mixin enablement:
 
-| Parameter                     | Description                                                           | Default value | Configuration in file form |
-|-------------------------------|-----------------------------------------------------------------------|---------------|----------------------------|
-| velocity.natives-disable      | Disable Native                                                        | false         | Not supported              |
-| velocity.linux-recast-enabled | Enable RecastLib for Linux                                            | false         | Not supported              |
+| Parameter                     | Description                | Default value | Configuration in file form |
+|-------------------------------|----------------------------|---------------|----------------------------|
+| velocity.natives-disable      | Disable Native             | false         | Not supported              |
 
 example:
 
@@ -76,20 +86,21 @@ example:
 java -Dvelocity.linux-recast-enabled=true -jar neoforge_launcher.jar
 ```
 
-### Use env instead of jvm args
-
-Some configuration items support using environment variables instead of jvm args.
-
-| JVM ARGS                      | Environment Variable |
-|-------------------------------|----------------------|
-| velocity.linux-recast-enabled | ENABLE_LINUX_RECAST  |
-
 ## Dependencies
+
 - [Krypton Fabric](https://modrinth.com/mod/krypton) - Optional dependency. I put some optimizations here.
 
-## License
-Partially used code from [PaperMC/Paperclip](https://github.com/PaperMC/Paperclip) to use it as PluginServer Patcher. 
-Licensed under MIT License.
+## Credit
 
-This work has a restrictive license in addition to the original license to prevent some unexpected behavior,
-see [404Setup Public License](https://github.com/404Setup/404Setup/blob/main/LICENSE.md)
+- [PaperMC/Paperclip](https://github.com/PaperMC/Paperclip) - MIT License
+- [RecastSSL](https://github.com/404Setup/RecastSSL) - BSD-3-Clause License
+- [RecastXZ](https://github.com/404Setup/RecastXZ) - Mozilla Public License 2.0
+- [javassist](https://github.com/jboss-javassist/javassist) - Apache-2.0 License
+- [ASM](https://asm.ow2.io/) - BSD-3-Clause License
+
+## License
+
+> This work has a restrictive license in addition to the original license to prevent some unexpected behavior,
+> see [404Setup Public License](https://github.com/404Setup/404Setup/blob/main/LICENSE.md)
+
+2025-2026 404Setup. All rights reserved. Source code is licensed under a LGPL-3.0 Only.

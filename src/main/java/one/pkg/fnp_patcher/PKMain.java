@@ -18,12 +18,9 @@ import java.util.jar.JarOutputStream;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 
-public class PKMain {
-    private static final String[] natives = new String[]{
-            "velocity-native-3.3.0-SNAPSHOT.jar",
-            "velocity-native-3.4.0-SNAPSHOT.jar"
-    };
+import static one.pkg.fnp_patcher.PKShared.TARGET_JARS;
 
+public class PKMain {
     private PKMain() {
     }
 
@@ -83,7 +80,9 @@ public class PKMain {
 
             originalJar.stream().forEach(entry -> {
                 try {
-                    if (!entry.getName().equals("META-INF/jars/" + natives[0]) && !entry.getName().equals("META-INF/jars/" + natives[1])) {
+                    if (!entry.getName().equals("META-INF/jars/" + TARGET_JARS[0]) &&
+                            !entry.getName().equals("META-INF/jars/" + TARGET_JARS[1]) &&
+                            !entry.getName().equals("META-INF/jars/" + TARGET_JARS[2])) {
                         jos.putNextEntry(new JarEntry(entry.getName()));
                         originalJar.getInputStream(entry).transferTo(jos);
                         jos.closeEntry();
@@ -94,7 +93,7 @@ public class PKMain {
             });
 
             sourceJar.stream()
-                    .filter(entry -> entry.getName().equals("META-INF/jars/" + natives[1]))
+                    .filter(entry -> entry.getName().equals("META-INF/jars/" + TARGET_JARS[2]))
                     .forEach(entry -> {
                         try {
                             jos.putNextEntry(new JarEntry(entry.getName()));
@@ -138,7 +137,7 @@ public class PKMain {
             });
 
             if (librariesList != null) {
-                ZipEntry nativeEntry = sourceJar.getEntry("META-INF/jars/" + natives[1]);
+                ZipEntry nativeEntry = sourceJar.getEntry("META-INF/jars/" + TARGET_JARS[2]);
                 if (nativeEntry != null) {
                     byte[] nativeBytes = sourceJar.getInputStream(nativeEntry).readAllBytes();
                     byte[] hash = Util.sha256Digest.digest(nativeBytes);
@@ -196,6 +195,12 @@ public class PKMain {
     }
 
     public static void main(String[] args) {
+        if (args.length > 0 && "--agent-mode".equals(args[0])) {
+            System.out.println("Please use this jar with -javaagent parameter");
+            System.out.println("Example: java -javaagent:fnp_patcher.jar -jar server.jar");
+            return;
+        }
+
         try {
             PKEntry target = findTargetJar();
             if (target.type() == PKType.UNKNOWN) {

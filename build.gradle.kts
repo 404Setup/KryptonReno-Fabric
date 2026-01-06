@@ -1,5 +1,6 @@
 plugins {
     id("fabric-loom") version "1.13-SNAPSHOT"
+    id("com.gradleup.shadow") version "9.3.0"
     id("maven-publish")
 }
 
@@ -15,6 +16,7 @@ loom.mixin.defaultRefmapName.set("fnp_patcher.refmap.json")
 
 repositories {
     mavenCentral()
+    maven("https://api.modrinth.com/maven")
     maven("https://mvnc.pkg.one/snapshots") {
         name = "OneSnapshot"
     }
@@ -26,12 +28,16 @@ dependencies {
     mappings(loom.officialMojangMappings())
     //mappings("net.fabricmc:yarn:${project.property("yarn_mappings")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
+    modImplementation("maven.modrinth:krypton:0.2.10")
     include(implementation("one.pkg.velocity_rc:velocity-native:3.4.0-SNAPSHOT")!!)
     include(implementation("org.yaml:snakeyaml:2.4")!!)
     include(implementation("one.pkg:sewlia-config:${config_api_version}") {
         exclude(group = "org.yaml")
         exclude(group = "org.slf4j")
     })
+    shadow("org.javassist:javassist:3.30.2-GA")
+    shadow("org.ow2.asm:asm:9.9")
+    shadow("org.ow2.asm:asm-commons:9.9")
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
 }
@@ -74,7 +80,46 @@ tasks.jar {
 
     manifest {
         attributes["Main-Class"] = "one.pkg.fnp_patcher.PKMain"
+        attributes["Premain-Class"] = "one.pkg.fnp_patcher.PKAgent"
+        attributes["Agent-Class"] = "one.pkg.fnp_patcher.PKAgent"
+        attributes["Can-Retransform-Classes"] = true
+        attributes["Can-Redefine-Classes"] = true
+        attributes["Boot-Class-Path"] = ""
     }
+}
+
+tasks.shadowJar {
+    isZip64 = true
+    configurations = listOf(project.configurations.getByName("shadow"))
+    archiveClassifier.set("dev")
+
+    relocate("org.objectweb.asm", "one.pkg.fnp_patcher.relocated.asm")
+    relocate("javassist", "one.pkg.fnp_patcher.relocated.javassist")
+}
+
+tasks.register<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("remapShadowJar") {
+    archiveClassifier.set("v2")
+    configurations = listOf(project.configurations.getByName("shadow"))
+
+    dependsOn(tasks.remapJar)
+
+    from(zipTree(tasks.remapJar.flatMap { it.archiveFile }))
+
+    relocate("org.objectweb.asm", "one.pkg.fnp_patcher.relocated.asm")
+    relocate("javassist", "one.pkg.fnp_patcher.relocated.javassist")
+
+    manifest {
+        attributes["Main-Class"] = "one.pkg.fnp_patcher.PKMain"
+        attributes["Premain-Class"] = "one.pkg.fnp_patcher.PKAgent"
+        attributes["Agent-Class"] = "one.pkg.fnp_patcher.PKAgent"
+        attributes["Can-Retransform-Classes"] = true
+        attributes["Can-Redefine-Classes"] = true
+        attributes["Boot-Class-Path"] = ""
+    }
+}
+
+tasks.build {
+    finalizedBy(tasks.named("remapShadowJar"))
 }
 
 publishing {

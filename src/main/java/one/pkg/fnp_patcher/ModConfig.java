@@ -21,6 +21,8 @@ public class ModConfig {
     private static boolean var5 = true;
     @ConfigTarget(group = "mixin", value = "bestVarLong", comment = "Optimized VarLong implementation")
     private static boolean var6 = true;
+    @ConfigTarget(group = "mixin", value = "clientEncrypt", comment = "Enable new encryption optimizations on the client side")
+    private static boolean var7 = true;
 
     static {
         config = new SewliaConfig(ConfigMeta.of(
@@ -59,6 +61,10 @@ public class ModConfig {
 
         public static boolean isBestVarLong() {
             return var6;
+        }
+
+        public static boolean isClientEncrypt() {
+            return var7;
         }
     }
 }

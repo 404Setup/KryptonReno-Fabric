@@ -63,6 +63,7 @@ public class ModMixinBootstrap implements IMixinConfigPlugin {
         TextFilter_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerTextFilterMixin", ModConfig.Mixin::isTextFilterVT),
         Util_VT("one.pkg.fnp_patcher.mixin.network.experimental.UtilMixin", ModConfig.Mixin::isUtilVT),
         BestVarLong("one.pkg.fnp_patcher.mixin.network.experimental.VarLongMixin", ModConfig.Mixin::isBestVarLong),
+        ClientEncrypt("one.pkg.fnp_patcher.mixin.network.experimental.ClientLoginMixin", ModConfig.Mixin::isClientEncrypt, "krypton"),
         KryptonFix128("one.pkg.fnp_patcher.mixin.network.fix.Varint21FrameDecoderMixin", ModConfig.Fix.Issues128::isEnabled, "krypton");
 
         public final String CLASS;

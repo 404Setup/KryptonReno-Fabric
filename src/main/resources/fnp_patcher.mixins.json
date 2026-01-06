@@ -13,6 +13,7 @@
     "network.fix.Varint21FrameDecoderMixin"
   ],
   "client": [
+    "network.experimental.ClientLoginMixin"
   ],
   "injectors": {
     "defaultRequire": 1
