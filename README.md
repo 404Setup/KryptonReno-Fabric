@@ -19,7 +19,7 @@ This is an extension mod for Krypton Fabric, ported from KryptonFNP.
 Install directly as a Mod.
 
 Starting from version 26.1.2, the Mod body no longer includes the Patcher and JavaAgent modules. If you still want them
-to take effect, please see [README](https://github.com/404Setup/KryptonFNP-Patcher/blob/master/javaagent/README.md).
+to take effect, please see [README](https://github.com/404Setup/FNP-Patcher/blob/1.21.9/javaagent/README.md).
 
 ## Config
 
