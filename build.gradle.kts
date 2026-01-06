@@ -28,7 +28,6 @@ dependencies {
     //mappings("net.fabricmc:yarn:${project.property("yarn_mappings")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
     modImplementation("maven.modrinth:krypton:0.2.10")
-    include(implementation("one.pkg.velocity_rc:velocity-native:3.4.0-SNAPSHOT")!!)
     include(implementation("org.yaml:snakeyaml:2.4")!!)
     include(implementation("one.pkg:sewlia-config:${config_api_version}") {
         exclude(group = "org.yaml")
