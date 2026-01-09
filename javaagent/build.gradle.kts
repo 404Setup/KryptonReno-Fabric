@@ -64,7 +64,7 @@ tasks.jar {
         rename { "${it}_${project.property("archives_base_name")}" }
     }
     from(embed) {
-        into("META-INF/jarjar")
+        into("META-INF/jars")
     }
     manifest.attributes(javaAgentManifest)
 }
