@@ -14,9 +14,13 @@ base {
 loom.mixin.defaultRefmapName.set("fnp_patcher.refmap.json")
 
 repositories {
-    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/") {
+        content {
+            excludeModule("one.pkg", "sewlia-config")
+        }
+    }
     maven("https://api.modrinth.com/maven")
-    maven("https://mvnc.pkg.one/snapshots") {
+    maven("https://mvn.pkg.one/snapshots") {
         name = "OneSnapshot"
     }
     maven("https://jitpack.io")

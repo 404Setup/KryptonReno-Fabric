@@ -1,6 +1,7 @@
 package one.pkg.fnp_patcher;
 
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static one.pkg.fnp_patcher.PKShared.TARGET_JARS;
@@ -77,20 +78,20 @@ public class JarHijacker {
     private static Path extractToTemp(URL resource, String jarName) {
         try {
             Path tempDir = Path.of(System.getProperty("java.io.tmpdir"), "fnp-patcher");
-            if (!java.nio.file.Files.exists(tempDir)) {
-                java.nio.file.Files.createDirectories(tempDir);
+            if (!Files.exists(tempDir)) {
+                Files.createDirectories(tempDir);
             }
 
             Path tempFile = tempDir.resolve(jarName);
 
-            if (java.nio.file.Files.exists(tempFile)) {
+            if (Files.exists(tempFile)) {
                 System.out.println("[FNP-Patcher] Using cached jar: " + tempFile);
                 return tempFile;
             }
 
             System.out.println("[FNP-Patcher] Extracting jar to: " + tempFile);
             try (var in = resource.openStream();
-                 var out = java.nio.file.Files.newOutputStream(tempFile)) {
+                 var out = Files.newOutputStream(tempFile)) {
                 byte[] buffer = new byte[8192];
                 int read;
                 while ((read = in.read(buffer)) != -1) {

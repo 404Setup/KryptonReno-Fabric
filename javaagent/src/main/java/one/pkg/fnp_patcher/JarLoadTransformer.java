@@ -5,6 +5,7 @@ import javassist.CtClass;
 import javassist.CtConstructor;
 import javassist.CtMethod;
 
+import java.io.ByteArrayInputStream;
 import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
 
@@ -49,7 +50,7 @@ public class JarLoadTransformer implements ClassFileTransformer {
 
     private byte[] transformPaperclip(byte[] classfileBuffer) throws Exception {
         ClassPool pool = ClassPool.getDefault();
-        CtClass ctClass = pool.makeClass(new java.io.ByteArrayInputStream(classfileBuffer));
+        CtClass ctClass = pool.makeClass(new ByteArrayInputStream(classfileBuffer));
 
         CtMethod setupClasspathMethod = ctClass.getDeclaredMethod("setupClasspath");
 
@@ -75,7 +76,7 @@ public class JarLoadTransformer implements ClassFileTransformer {
 
     private byte[] transformJarEntry(byte[] classfileBuffer) throws Exception {
         ClassPool pool = ClassPool.getDefault();
-        CtClass ctClass = pool.makeClass(new java.io.ByteArrayInputStream(classfileBuffer));
+        CtClass ctClass = pool.makeClass(new ByteArrayInputStream(classfileBuffer));
 
         CtConstructor[] constructors = ctClass.getDeclaredConstructors();
 

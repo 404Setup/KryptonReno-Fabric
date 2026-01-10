@@ -18,8 +18,8 @@ base {
 }
 
 repositories {
-    mavenCentral()
-    maven("https://mvnc.pkg.one/snapshots") {
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://mvn.pkg.one/snapshots") {
         name = "OneSnapshot"
     }
 }
