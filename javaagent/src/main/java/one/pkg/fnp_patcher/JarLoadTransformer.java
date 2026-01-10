@@ -4,6 +4,7 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtConstructor;
 import javassist.CtMethod;
+import one.pkg.fnp_patcher.paperclip.ClipType;
 
 import java.io.ByteArrayInputStream;
 import java.lang.instrument.ClassFileTransformer;
@@ -15,13 +16,17 @@ public class JarLoadTransformer implements ClassFileTransformer {
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain, byte[] classfileBuffer) {
 
-        if ("io/papermc/paperclip/Paperclip".equals(className)) {
-            try {
-                System.out.println("[FNP-Patcher] Transforming Paperclip class");
-                return transformPaperclip(classfileBuffer);
-            } catch (Exception e) {
-                System.err.println("[FNP-Patcher] Failed to transform Paperclip: " + e.getMessage());
-                e.printStackTrace();
+        for (ClipType clip : ClipType.values()) {
+            if (clip.toPackageName().equals(className)) {
+                String clipName = clip.name();
+                try {
+                    System.out.println("[FNP-Patcher] Transforming " + clipName + " class");
+                    return transformPaperclip(classfileBuffer, clipName);
+                } catch (Exception e) {
+                    System.err.println("[FNP-Patcher] Failed to transform " + clipName + ": " + e.getMessage());
+                    e.printStackTrace();
+                }
+                break;
             }
         }
 
@@ -48,7 +53,7 @@ public class JarLoadTransformer implements ClassFileTransformer {
         return null;
     }
 
-    private byte[] transformPaperclip(byte[] classfileBuffer) throws Exception {
+    private byte[] transformPaperclip(byte[] classfileBuffer, String clipName) throws Exception {
         ClassPool pool = ClassPool.getDefault();
         CtClass ctClass = pool.makeClass(new ByteArrayInputStream(classfileBuffer));
 
@@ -70,7 +75,7 @@ public class JarLoadTransformer implements ClassFileTransformer {
         byte[] byteCode = ctClass.toBytecode();
         ctClass.detach();
 
-        System.out.println("[FNP-Patcher] Paperclip transformation completed");
+        System.out.println("[FNP-Patcher] " + clipName + " transformation completed");
         return byteCode;
     }
 
