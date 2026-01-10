@@ -4,27 +4,33 @@ import org.objectweb.asm.*;
 import org.objectweb.asm.commons.AdviceAdapter;
 
 public class KnotClassLoaderTransformer {
-
     public static byte[] transform(byte[] classfileBuffer) {
         ClassReader cr = new ClassReader(classfileBuffer);
         ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 
-        ClassVisitor cv = new ClassVisitor(Opcodes.ASM9, cw) {
-            @Override
-            public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-                MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
-
-                if ("<init>".equals(name)) {
-                    System.out.println("[FNP-Patcher] Found KnotClassLoader constructor: " + descriptor);
-                    return new ConstructorAdapter(Opcodes.ASM9, mv, access, name, descriptor);
-                }
-
-                return mv;
-            }
-        };
+        ClassVisitor cv = new KnotClassVisitor(Opcodes.ASM9, cw);
 
         cr.accept(cv, ClassReader.EXPAND_FRAMES);
         return cw.toByteArray();
+    }
+
+    public static class KnotClassVisitor extends ClassVisitor {
+        public KnotClassVisitor(int api,
+                                ClassVisitor classVisitor) {
+            super(api, classVisitor);
+        }
+
+        @Override
+        public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
+            MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
+
+            if ("<init>".equals(name)) {
+                System.out.println("[FNP-Patcher] Found KnotClassLoader constructor: " + descriptor);
+                return new ConstructorAdapter(Opcodes.ASM9, mv, access, name, descriptor);
+            }
+
+            return mv;
+        }
     }
 
     private static class ConstructorAdapter extends AdviceAdapter {
