@@ -26,8 +26,6 @@ $\color{Red}\Huge{\textbf{ on how to use them.}}$
 
 ## Install
 
-Patcher and Javaagent are currently incompatible with servers using the Paperclip fork.
-
 Native replacement is only compatible with Velocity version 3.2.0-SNAPSHOT and later.
 
 ### Javaagent
@@ -40,9 +38,9 @@ Native replacement is only compatible with Velocity version 3.2.0-SNAPSHOT and l
 >
 > **About PaperServer**
 >
-> Only applicable to server implementations that do not use the Paperclip fork
+> Currently, it should be compatible with most Paper forks, and you can use it with confidence.
 >
-> Incompatible with other PaperClip forks due to package name changes and other unknown modifications.
+> JavaAgent does not have any built-in update checker and it is recommended to star this repository to receive updates.
 
 Javaagent mode allows dynamic Native replacement without modifying Krypton Fabric.
 
@@ -66,6 +64,7 @@ Javaagent mode allows dynamic Native replacement without modifying Krypton Fabri
 4. Done
 
 ## Download
+
 Github Release
 
 ## Credit
