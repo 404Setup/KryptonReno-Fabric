@@ -1,6 +1,6 @@
-## FNP Patcher JavaAgent
+## KryptonReno's Fabric Patcher's JavaAgent
 
-This is the JavaAgent version of FNP Patcher. Due to review policies,
+This is the JavaAgent version of `KryptonReno's Fabric Patcher`. Due to review policies,
 this component cannot be published on Modrinth and CurseForge,
 so you cannot include it in any Modpack.
 
@@ -13,15 +13,15 @@ $\color{Red}\Huge{\textbf{Krypton Fabric/PaperServer }}$
 $\color{Red}\Huge{\textbf{in your modpack!}}$
 
 $\color{Red}\Huge{\textbf{Instead install both }}$
-$\color{Red}\Huge{\textbf{Krypton Fabric/PaperServer and KryptonFNP }}$
-$\color{Red}\Huge{\textbf{Patcher and give instructions}}$
+$\color{Red}\Huge{\textbf{Krypton Fabric/PaperServer and KryptonReno's }}$
+$\color{Red}\Huge{\textbf{Fabric Patcher and give instructions}}$
 $\color{Red}\Huge{\textbf{ on how to use them.}}$
 
 ## Warning
 
-- It is forbidden to distribute FNP Patcher Agent in any way
-- It is forbidden to distribute the products of FNP Patcher in any way, such as Krypton Fabric Patched or PaperLike
-  Patched
+- It is forbidden to distribute KryptonReno's Fabric Patcher Agent in any way
+- It is forbidden to distribute the products of KryptonReno's Fabric Patcher in any way, such as 
+Krypton Fabric Patched or PaperLike Patched
 - Prohibition of monetization
 
 ## Install
@@ -32,7 +32,7 @@ Native replacement is only compatible with Velocity version 3.2.0-SNAPSHOT and l
 
 > **About Fabric Loader**:
 >
-> Compatible range: 0.17.2 - 0.18.4, other versions untested but theoretically compatible.
+> Compatible range: 0.17.2 - 0.19.2, other versions untested but theoretically compatible.
 >
 > Quilt compatibility is unknown. May conflict with some anti-cheat implementations, use with caution.
 >
@@ -48,7 +48,7 @@ Javaagent mode allows dynamic Native replacement without modifying Krypton Fabri
 
 1. Download FNP Patcher JavaAgent
 2. Place it in the game root directory (not the mods directory)
-3. Modify the game launch configuration, add `-javaagent:fnp_patcher.jar` to the JVM startup arguments
+3. Modify the game launch configuration, add `-javaagent:kreno_fpatcher.jar` to the JVM startup arguments
 4. Launch the game
 
 ### Patcher (Deprecated)
@@ -60,7 +60,7 @@ Javaagent mode allows dynamic Native replacement without modifying Krypton Fabri
 
 1. Install FNP Patcher JavaAgent and Paper Server/Krypton Fabric in the same directory
 2. Open Terminal
-3. Use command: `java -jar kryptonfnp_patcher.jar` (Please use actual file names!)
+3. Use command: `java -jar kryptonreno_patcher.jar` (Please use actual file names!)
 4. Done
 
 ## Download

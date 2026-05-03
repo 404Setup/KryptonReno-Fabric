@@ -1,4 +1,4 @@
-package one.pkg.fnp_patcher.mixin.network.experimental;
+package one.pkg.kreno_fpatcher.mixin.network.experimental;
 
 import io.netty.channel.ChannelFutureListener;
 import me.steinborn.krypton.mod.shared.network.ClientConnectionEncryptionExtension;
@@ -23,12 +23,12 @@ public class ClientLoginMixin {
     @Final
     private Connection connection;
     @Unique
-    private Key kfnp$secretKey;
+    private Key kreno_fpatcher$secretKey;
 
     @Redirect(method = "handleHello", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Crypt;getCipher(ILjava/security/Key;)Ljavax/crypto/Cipher;"))
-    private Cipher handleHello$initKey(int ignored1, Key secretKey) {
-        if (this.kfnp$secretKey == null)
-            this.kfnp$secretKey = secretKey;
+    private Cipher handleHello$initKey(int opMode, Key key) {
+        if (this.kreno_fpatcher$secretKey == null)
+            this.kreno_fpatcher$secretKey = key;
         return null;
     }
 
@@ -36,7 +36,7 @@ public class ClientLoginMixin {
     public ChannelFutureListener initEncryption(Runnable runnable) {
         return PacketSendListener.thenRun(() -> {
             try {
-                ((ClientConnectionEncryptionExtension) this.connection).setupEncryption((SecretKey) kfnp$secretKey);
+                ((ClientConnectionEncryptionExtension) this.connection).setupEncryption((SecretKey) kreno_fpatcher$secretKey);
             } catch (GeneralSecurityException e) {
                 throw new RuntimeException(e);
             }

@@ -1,4 +1,4 @@
-package one.pkg.fnp_patcher;
+package one.pkg.kreno_fpatcher;
 
 import org.objectweb.asm.*;
 import org.objectweb.asm.commons.AdviceAdapter;
@@ -25,7 +25,7 @@ public class KnotClassLoaderTransformer {
             MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
 
             if ("<init>".equals(name)) {
-                System.out.println("[FNP-Patcher] Found KnotClassLoader constructor: " + descriptor);
+                System.out.println("[KRENO FPATCHER] Found KnotClassLoader constructor: " + descriptor);
                 return new ConstructorAdapter(Opcodes.ASM9, mv, access, name, descriptor);
             }
 
@@ -42,19 +42,19 @@ public class KnotClassLoaderTransformer {
         @Override
         protected void onMethodExit(int opcode) {
             if (opcode == RETURN) {
-                System.out.println("[FNP-Patcher] Injecting velocity-native loading code into constructor");
+                System.out.println("[KRENO FPATCHER] Injecting velocity-native loading code into constructor");
 
                 // try {
-                //     System.out.println("[FNP-Patcher] Injecting velocity-native into KnotClassLoader");
+                //     System.out.println("[KRENO FPATCHER] Injecting velocity-native into KnotClassLoader");
                 //     URL velocityUrl = JarHijacker.getBuiltinJarUrl();
                 //     if (velocityUrl != null) {
                 //         this.urlLoader.addURL(velocityUrl);
-                //         System.out.println("[FNP-Patcher] Successfully added velocity-native: " + velocityUrl);
+                //         System.out.println("[KRENO FPATCHER] Successfully added velocity-native: " + velocityUrl);
                 //     } else {
-                //         System.err.println("[FNP-Patcher] Failed to get velocity-native URL");
+                //         System.err.println("[KRENO FPATCHER] Failed to get velocity-native URL");
                 //     }
                 // } catch (Exception e) {
-                //     System.err.println("[FNP-Patcher] Error injecting velocity-native: " + e.getMessage());
+                //     System.err.println("[KRENO FPATCHER] Error injecting velocity-native: " + e.getMessage());
                 //e.printStackTrace();
                 // }
                 Label tryStart = new Label();
@@ -66,10 +66,10 @@ public class KnotClassLoaderTransformer {
                 mv.visitLabel(tryStart);
 
                 mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-                mv.visitLdcInsn("[FNP-Patcher] Injecting velocity-native into KnotClassLoader");
+                mv.visitLdcInsn("[KRENO FPATCHER] Injecting velocity-native into KnotClassLoader");
                 mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
 
-                mv.visitMethodInsn(INVOKESTATIC, "one/pkg/fnp_patcher/JarHijacker", "getBuiltinJarUrl", "()Ljava/net/URL;", false);
+                mv.visitMethodInsn(INVOKESTATIC, "one/pkg/kreno_fpatcher/JarHijacker", "getBuiltinJarUrl", "()Ljava/net/URL;", false);
                 int velocityUrlVar = newLocal(Type.getType("Ljava/net/URL;"));
                 mv.visitVarInsn(ASTORE, velocityUrlVar);
                 mv.visitVarInsn(ALOAD, velocityUrlVar);
@@ -87,7 +87,7 @@ public class KnotClassLoaderTransformer {
                 mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
                 mv.visitInsn(DUP);
                 mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
-                mv.visitLdcInsn("[FNP-Patcher] Successfully added velocity-native: ");
+                mv.visitLdcInsn("[KRENO FPATCHER] Successfully added velocity-native: ");
                 mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append",
                         "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
                 mv.visitVarInsn(ALOAD, velocityUrlVar);
@@ -103,7 +103,7 @@ public class KnotClassLoaderTransformer {
                 // else
                 mv.visitLabel(nullLabel);
                 mv.visitFieldInsn(GETSTATIC, "java/lang/System", "err", "Ljava/io/PrintStream;");
-                mv.visitLdcInsn("[FNP-Patcher] Failed to get velocity-native URL");
+                mv.visitLdcInsn("[KRENO FPATCHER] Failed to get velocity-native URL");
                 mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
 
                 mv.visitLabel(afterIf);
@@ -118,7 +118,7 @@ public class KnotClassLoaderTransformer {
                 mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
                 mv.visitInsn(DUP);
                 mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
-                mv.visitLdcInsn("[FNP-Patcher] Error injecting velocity-native: ");
+                mv.visitLdcInsn("[KRENO FPATCHER] Error injecting velocity-native: ");
                 mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append",
                         "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
                 mv.visitVarInsn(ALOAD, exceptionVar);

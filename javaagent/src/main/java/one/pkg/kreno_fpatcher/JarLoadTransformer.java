@@ -1,10 +1,10 @@
-package one.pkg.fnp_patcher;
+package one.pkg.kreno_fpatcher;
 
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtConstructor;
 import javassist.CtMethod;
-import one.pkg.fnp_patcher.paperclip.ClipType;
+import one.pkg.kreno_fpatcher.paperclip.ClipType;
 
 import java.io.ByteArrayInputStream;
 import java.lang.instrument.ClassFileTransformer;
@@ -20,10 +20,10 @@ public class JarLoadTransformer implements ClassFileTransformer {
             if (clip.toPackageName().equals(className)) {
                 String clipName = clip.name();
                 try {
-                    System.out.println("[FNP-Patcher] Transforming " + clipName + " class");
+                    System.out.println("[KRENO FPATCHER] Transforming " + clipName + " class");
                     return transformPaperclip(classfileBuffer, clipName);
                 } catch (Exception e) {
-                    System.err.println("[FNP-Patcher] Failed to transform " + clipName + ": " + e.getMessage());
+                    System.err.println("[KRENO FPATCHER] Failed to transform " + clipName + ": " + e.getMessage());
                     e.printStackTrace();
                 }
                 break;
@@ -32,20 +32,20 @@ public class JarLoadTransformer implements ClassFileTransformer {
 
         if ("net/fabricmc/loader/impl/metadata/V1ModMetadata$JarEntry".equals(className)) {
             try {
-                System.out.println("[FNP-Patcher] Transforming V1ModMetadata$JarEntry class");
+                System.out.println("[KRENO FPATCHER] Transforming V1ModMetadata$JarEntry class");
                 return transformJarEntry(classfileBuffer);
             } catch (Exception e) {
-                System.err.println("[FNP-Patcher] Failed to transform JarEntry: " + e.getMessage());
+                System.err.println("[KRENO FPATCHER] Failed to transform JarEntry: " + e.getMessage());
                 e.printStackTrace();
             }
         }
 
         if ("net/fabricmc/loader/impl/launch/knot/KnotClassLoader".equals(className)) {
             try {
-                System.out.println("[FNP-Patcher] Transforming KnotClassLoader class with ASM");
+                System.out.println("[KRENO FPATCHER] Transforming KnotClassLoader class with ASM");
                 return KnotClassLoaderTransformer.transform(classfileBuffer);
             } catch (Exception e) {
-                System.err.println("[FNP-Patcher] Failed to transform KnotClassLoader: " + e.getMessage());
+                System.err.println("[KRENO FPATCHER] Failed to transform KnotClassLoader: " + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -61,21 +61,21 @@ public class JarLoadTransformer implements ClassFileTransformer {
 
         setupClasspathMethod.insertBefore(
                 "{ " +
-                        "  System.out.println(\"[FNP-Patcher] setupClasspath called, preparing to hijack...\");" +
+                        "  System.out.println(\"[KRENO FPATCHER] setupClasspath called, preparing to hijack...\");" +
                         "}"
         );
 
         setupClasspathMethod.insertAfter(
                 "{ " +
-                        "  System.out.println(\"[FNP-Patcher] Hijacking velocity-native jars in classpath...\");" +
-                        "  $_ = one.pkg.fnp_patcher.JarHijacker.hijackClasspathUrls($_);" +
+                        "  System.out.println(\"[KRENO FPATCHER] Hijacking velocity-native jars in classpath...\");" +
+                        "  $_ = one.pkg.kreno_fpatcher.JarHijacker.hijackClasspathUrls($_);" +
                         "}"
         );
 
         byte[] byteCode = ctClass.toBytecode();
         ctClass.detach();
 
-        System.out.println("[FNP-Patcher] " + clipName + " transformation completed");
+        System.out.println("[KRENO FPATCHER] " + clipName + " transformation completed");
         return byteCode;
     }
 
@@ -89,12 +89,12 @@ public class JarLoadTransformer implements ClassFileTransformer {
             if (constructor.getParameterTypes().length == 1 &&
                     constructor.getParameterTypes()[0].getName().equals("java.lang.String")) {
 
-                System.out.println("[FNP-Patcher] Found JarEntry(String) constructor, injecting hijack logic");
+                System.out.println("[KRENO FPATCHER] Found JarEntry(String) constructor, injecting hijack logic");
 
                 constructor.insertBefore(
                         "{ " +
                                 "  if ($1 != null && $1.contains(\"velocity-native\")) {" +
-                                "    System.out.println(\"[FNP-Patcher] Hijacking velocity-native jar: \" + $1);" +
+                                "    System.out.println(\"[KRENO FPATCHER] Hijacking velocity-native jar: \" + $1);" +
                                 "    $1 = \"\";" +
                                 "  }" +
                                 "}"
@@ -107,7 +107,7 @@ public class JarLoadTransformer implements ClassFileTransformer {
         byte[] byteCode = ctClass.toBytecode();
         ctClass.detach();
 
-        System.out.println("[FNP-Patcher] JarEntry transformation completed");
+        System.out.println("[KRENO FPATCHER] JarEntry transformation completed");
         return byteCode;
     }
 }

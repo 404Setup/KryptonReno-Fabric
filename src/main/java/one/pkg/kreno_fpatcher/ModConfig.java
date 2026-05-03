@@ -1,4 +1,4 @@
-package one.pkg.fnp_patcher;
+package one.pkg.kreno_fpatcher;
 
 import net.fabricmc.loader.api.FabricLoader;
 import one.pkg.config.SewliaConfig;
@@ -6,7 +6,7 @@ import one.pkg.config.annotation.config.ConfigEntry;
 import one.pkg.config.annotation.config.ConfigTarget;
 import one.pkg.config.metadata.ConfigMeta;
 
-@ConfigEntry("kryptonfnp_patcher")
+@ConfigEntry("kreno_fpatcher")
 public class ModConfig {
     public static final SewliaConfig config;
     @ConfigTarget(group = "fix.issues128", value = "enabled", comment = "Fix Traffic Statistics")
@@ -27,7 +27,7 @@ public class ModConfig {
     static {
         config = new SewliaConfig(ConfigMeta.of(
                 ModConfig.class,
-                FabricLoader.getInstance().getConfigDir().resolve("krypton_fnp.yaml"))
+                FabricLoader.getInstance().getConfigDir().resolve("kreno_fpatcher.yaml"))
         );
     }
 

@@ -1,7 +1,7 @@
-package one.pkg.fnp_patcher.mixin;
+package one.pkg.kreno_fpatcher.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
-import one.pkg.fnp_patcher.ModConfig;
+import one.pkg.kreno_fpatcher.ModConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.objectweb.asm.tree.ClassNode;
@@ -59,12 +59,12 @@ public class ModMixinBootstrap implements IMixinConfigPlugin {
     }
 
     enum CONFIG {
-        Login_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerLoginPacketListenerImplMixin", ModConfig.Mixin::isLoginVT),
-        TextFilter_VT("one.pkg.fnp_patcher.mixin.network.experimental.ServerTextFilterMixin", ModConfig.Mixin::isTextFilterVT),
-        Util_VT("one.pkg.fnp_patcher.mixin.network.experimental.UtilMixin", ModConfig.Mixin::isUtilVT),
-        BestVarLong("one.pkg.fnp_patcher.mixin.network.experimental.VarLongMixin", ModConfig.Mixin::isBestVarLong),
-        ClientEncrypt("one.pkg.fnp_patcher.mixin.network.experimental.ClientLoginMixin", ModConfig.Mixin::isClientEncrypt, "krypton"),
-        KryptonFix128("one.pkg.fnp_patcher.mixin.network.fix.Varint21FrameDecoderMixin", ModConfig.Fix.Issues128::isEnabled, "krypton");
+        Login_VT("one.pkg.kreno_fpatcher.mixin.network.experimental.ServerLoginPacketListenerImplMixin", ModConfig.Mixin::isLoginVT),
+        TextFilter_VT("one.pkg.kreno_fpatcher.mixin.network.experimental.ServerTextFilterMixin", ModConfig.Mixin::isTextFilterVT),
+        Util_VT("one.pkg.kreno_fpatcher.mixin.network.experimental.UtilMixin", ModConfig.Mixin::isUtilVT),
+        BestVarLong("one.pkg.kreno_fpatcher.mixin.network.experimental.VarLongMixin", ModConfig.Mixin::isBestVarLong),
+        ClientEncrypt("one.pkg.kreno_fpatcher.mixin.network.experimental.ClientLoginMixin", ModConfig.Mixin::isClientEncrypt, "krypton"),
+        KryptonFix128("one.pkg.kreno_fpatcher.mixin.network.fix.Varint21FrameDecoderMixin", ModConfig.Fix.Issues128::isEnabled, "krypton");
 
         public final String CLASS;
         public final Supplier<Boolean> configTarget;

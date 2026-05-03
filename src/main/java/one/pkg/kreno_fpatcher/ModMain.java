@@ -1,9 +1,9 @@
-package one.pkg.fnp_patcher;
+package one.pkg.kreno_fpatcher;
 
 import net.fabricmc.api.ModInitializer;
 
 public class ModMain implements ModInitializer {
-    private static final String MOD_ID = "fnp_patcher";
+    private static final String MOD_ID = "kreno_fpatcher";
 
     @Override
     public void onInitialize() {

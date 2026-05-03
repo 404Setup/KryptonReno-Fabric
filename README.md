@@ -1,11 +1,11 @@
-# FNP Patcher
+# KryptonReno's Fabric Patcher
 
-[![](https://badges.moddingx.org/modrinth/downloads/kryptonfnp-patcher)](https://modrinth.com/mod/kryptonfnp-patcher)
-[![](https://badges.moddingx.org/curseforge/downloads/1294543)](https://www.curseforge.com/minecraft/mc-mods/kryptonfnp-patcher)
+[![](https://badges.moddingx.org/modrinth/downloads/kreno-fpatcher)](https://modrinth.com/mod/kreno-fpatcher)
+[![](https://badges.moddingx.org/curseforge/downloads/1294543)](https://www.curseforge.com/minecraft/mc-mods/kreno-fpatcher)
 
-[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/kryptonfnp-patcher)
-[![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/kryptonfnp-patcher)
-[![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/github_vector.svg)](https://github.com/404Setup/FNP-Patcher)
+[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/kreno-fpatcher)
+[![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/kreno-fpatcher)
+[![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/github_vector.svg)](https://github.com/404Setup/KryptonReno-Fabric)
 
 This is an extension mod for Krypton Fabric, ported from KryptonFNP.
 
@@ -19,7 +19,7 @@ This is an extension mod for Krypton Fabric, ported from KryptonFNP.
 Install directly as a Mod.
 
 Starting from version 26.1.2, the Mod body no longer includes the Patcher and JavaAgent modules. If you still want them
-to take effect, please see [README](https://github.com/404Setup/FNP-Patcher/blob/1.21.9/javaagent/README.md).
+to take effect, please see [README](https://github.com/404Setup/KryptonReno-Fabric/blob/26.1/javaagent/README.md).
 
 ## Config
 

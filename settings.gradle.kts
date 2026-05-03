@@ -7,4 +7,5 @@ pluginManagement {
     }
 }
 
+rootProject.name = "KRenoFPatcher"
 include("javaagent")

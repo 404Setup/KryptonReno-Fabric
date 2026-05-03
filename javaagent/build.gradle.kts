@@ -3,7 +3,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     java
-    id("com.gradleup.shadow") version "9.3.0"
+    id("com.gradleup.shadow") version "9.4.1"
 }
 
 val embed: Configuration by configurations.creating {
@@ -19,7 +19,7 @@ base {
 
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
-    maven("https://mvn.pkg.one/snapshots") {
+    maven("https://mvnc.pkg.one/snapshots") {
         name = "OneSnapshot"
     }
 }
@@ -35,17 +35,17 @@ dependencies {
 }
 
 val javaAgentManifest = mapOf(
-    "Main-Class" to "one.pkg.fnp_patcher.PKMain",
-    "Premain-Class" to "one.pkg.fnp_patcher.PKAgent",
-    "Agent-Class" to "one.pkg.fnp_patcher.PKAgent",
+    "Main-Class" to "one.pkg.kreno_fpatcher.PKMain",
+    "Premain-Class" to "one.pkg.kreno_fpatcher.PKAgent",
+    "Agent-Class" to "one.pkg.kreno_fpatcher.PKAgent",
     "Can-Retransform-Classes" to true,
     "Can-Redefine-Classes" to true,
     "Boot-Class-Path" to ""
 )
 
 fun ShadowJar.applyCommonConfig() {
-    relocate("org.objectweb.asm", "one.pkg.fnp_patcher.relocated.asm")
-    relocate("javassist", "one.pkg.fnp_patcher.relocated.javassist")
+    relocate("org.objectweb.asm", "one.pkg.kreno_fpatcher.relocated.asm")
+    relocate("javassist", "one.pkg.kreno_fpatcher.relocated.javassist")
 }
 
 val targetJavaVersion = 17

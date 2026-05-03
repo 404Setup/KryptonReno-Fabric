@@ -1,4 +1,4 @@
-package one.pkg.fnp_patcher.paperclip;
+package one.pkg.kreno_fpatcher.paperclip;
 
 public enum ClipType {
     PaperClip("io.papermc.paperclip.Paperclip"), LightClip("dev.menthamc.lightclip.Lightclip"),

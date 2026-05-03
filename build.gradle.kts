@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "1.13-SNAPSHOT"
+    id("net.fabricmc.fabric-loom") version "1.15-SNAPSHOT"
     id("maven-publish")
 }
 
@@ -11,8 +11,6 @@ base {
     archivesName.set(project.property("archives_base_name") as String)
 }
 
-loom.mixin.defaultRefmapName.set("fnp_patcher.refmap.json")
-
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/") {
         content {
@@ -20,7 +18,7 @@ repositories {
         }
     }
     maven("https://api.modrinth.com/maven")
-    maven("https://mvn.pkg.one/snapshots") {
+    maven("https://mvnc.pkg.one/snapshots") {
         name = "OneSnapshot"
     }
     maven("https://jitpack.io")
@@ -28,17 +26,15 @@ repositories {
 
 dependencies {
     minecraft("com.mojang:minecraft:${project.property("minecraft_version")}")
-    mappings(loom.officialMojangMappings())
-    //mappings("net.fabricmc:yarn:${project.property("yarn_mappings")}:v2")
-    modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
-    modImplementation("maven.modrinth:krypton:0.2.10")
-    include(implementation("org.yaml:snakeyaml:2.4")!!)
+    implementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
+    implementation("maven.modrinth:krypton:0.3.0")
+    include(implementation("org.yaml:snakeyaml:2.5")!!)
     include(implementation("one.pkg:sewlia-config:${config_api_version}") {
         exclude(group = "org.yaml")
         exclude(group = "org.slf4j")
     })
 
-    modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
+    implementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
 }
 
 tasks.processResources {
@@ -56,7 +52,7 @@ tasks.processResources {
     }
 }
 
-val targetJavaVersion = 21
+val targetJavaVersion = 25
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible) {

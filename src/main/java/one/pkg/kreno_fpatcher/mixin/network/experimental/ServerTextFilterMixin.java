@@ -1,4 +1,4 @@
-package one.pkg.fnp_patcher.mixin.network.experimental;
+package one.pkg.kreno_fpatcher.mixin.network.experimental;
 
 import net.minecraft.server.network.ServerTextFilter;
 import org.spongepowered.asm.mixin.Final;

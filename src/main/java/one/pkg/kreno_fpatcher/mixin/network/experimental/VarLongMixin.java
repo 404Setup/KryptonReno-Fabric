@@ -1,8 +1,8 @@
-package one.pkg.fnp_patcher.mixin.network.experimental;
+package one.pkg.kreno_fpatcher.mixin.network.experimental;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.VarLong;
-import one.pkg.fnp_patcher.util.VarLongUtil;
+import one.pkg.kreno_fpatcher.util.VarLongUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 

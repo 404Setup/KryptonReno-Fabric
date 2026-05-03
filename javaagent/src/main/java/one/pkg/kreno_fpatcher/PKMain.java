@@ -1,4 +1,4 @@
-package one.pkg.fnp_patcher;
+package one.pkg.kreno_fpatcher;
 
 import io.papermc.paperclip.Util;
 
@@ -18,7 +18,7 @@ import java.util.jar.JarOutputStream;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 
-import static one.pkg.fnp_patcher.PKShared.TARGET_JARS;
+import static one.pkg.kreno_fpatcher.PKShared.TARGET_JARS;
 
 public class PKMain {
     private PKMain() {
@@ -27,7 +27,7 @@ public class PKMain {
     private static List<File> getJarFiles(Path dir) {
         try (final Stream<Path> files = Files.list(dir)) {
             return files.filter(path ->
-                            !path.toString().contains("fnp_patcher") && path.toString().endsWith(".jar") && path.toFile().isFile()
+                            !path.toString().contains("kreno_fpatcher") && path.toString().endsWith(".jar") && path.toFile().isFile()
                     )
                     .map(Path::toFile).toList();
         } catch (IOException e) {
@@ -80,9 +80,12 @@ public class PKMain {
 
             originalJar.stream().forEach(entry -> {
                 try {
-                    if (!entry.getName().equals("META-INF/jars/" + TARGET_JARS[0]) &&
-                            !entry.getName().equals("META-INF/jars/" + TARGET_JARS[1]) &&
-                            !entry.getName().equals("META-INF/jars/" + TARGET_JARS[2])) {
+                    if (
+                            !entry.getName().equals("META-INF/jars/" + TARGET_JARS[0]) &&
+                                    !entry.getName().equals("META-INF/jars/" + TARGET_JARS[1]) &&
+                                    !entry.getName().equals("META-INF/jars/" + TARGET_JARS[2]) &&
+                                    !entry.getName().equals("META-INF/jars/" + TARGET_JARS[3])
+                    ) {
                         jos.putNextEntry(new JarEntry(entry.getName()));
                         originalJar.getInputStream(entry).transferTo(jos);
                         jos.closeEntry();
@@ -104,8 +107,8 @@ public class PKMain {
                         }
                     });
 
-            jos.putNextEntry(new JarEntry("fnp.patched"));
-            jos.write("FNP Patcher applied".getBytes(StandardCharsets.UTF_8));
+            jos.putNextEntry(new JarEntry("kreno.patched"));
+            jos.write("KRENO FPATCHER applied".getBytes(StandardCharsets.UTF_8));
             jos.closeEntry();
         }
 
@@ -168,8 +171,8 @@ public class PKMain {
                 }
             }
 
-            jos.putNextEntry(new JarEntry("fnp.patched"));
-            jos.write("FNP Patcher applied".getBytes(StandardCharsets.UTF_8));
+            jos.putNextEntry(new JarEntry("kreno.patched"));
+            jos.write("KRENO FPATCHER applied".getBytes(StandardCharsets.UTF_8));
             jos.closeEntry();
 
         }
@@ -197,7 +200,7 @@ public class PKMain {
     public static void main(String[] args) {
         if (args.length > 0 && "--agent-mode".equals(args[0])) {
             System.out.println("Please use this jar with -javaagent parameter");
-            System.out.println("Example: java -javaagent:fnp_patcher.jar -jar server.jar");
+            System.out.println("Example: java -javaagent:kreno_fpatcher.jar -jar server.jar");
             return;
         }
 

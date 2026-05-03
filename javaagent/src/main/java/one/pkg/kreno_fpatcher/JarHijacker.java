@@ -1,10 +1,10 @@
-package one.pkg.fnp_patcher;
+package one.pkg.kreno_fpatcher;
 
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static one.pkg.fnp_patcher.PKShared.TARGET_JARS;
+import static one.pkg.kreno_fpatcher.PKShared.TARGET_JARS;
 
 public class JarHijacker {
     public static URL[] hijackClasspathUrls(URL[] originalUrls) {
@@ -25,7 +25,7 @@ public class JarHijacker {
                     URL hijackedUrl = getBuiltinJarUrl();
                     if (hijackedUrl != null) {
                         newUrls[i] = hijackedUrl;
-                        System.out.println("[FNP-Patcher] Hijacked: " + urlPath + " -> " + hijackedUrl);
+                        System.out.println("[KRENO FPATCHER] Hijacked: " + urlPath + " -> " + hijackedUrl);
                         modified = true;
                         hijacked = true;
                         break;
@@ -46,17 +46,17 @@ public class JarHijacker {
         try {
             URL resource = JarHijacker.class.getResource("/META-INF/jars/" + jarName);
             if (resource != null) {
-                System.out.println("[FNP-Patcher] Found builtin jar resource: " + resource);
+                System.out.println("[KRENO FPATCHER] Found builtin jar resource: " + resource);
 
                 Path tempFile = extractToTemp(resource, jarName);
                 if (tempFile != null) {
                     return tempFile;
                 }
             } else {
-                System.err.println("[FNP-Patcher] Builtin jar not found in resources: /META-INF/jars/" + jarName);
+                System.err.println("[KRENO FPATCHER] Builtin jar not found in resources: /META-INF/jars/" + jarName);
             }
         } catch (Exception e) {
-            System.err.println("[FNP-Patcher] Failed to load builtin jar " + jarName + ": " + e.getMessage());
+            System.err.println("[KRENO FPATCHER] Failed to load builtin jar " + jarName + ": " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -69,7 +69,7 @@ public class JarHijacker {
                 return jarPath.toUri().toURL();
             }
         } catch (Exception e) {
-            System.err.println("[FNP-Patcher] Failed to load builtin jar " + TARGET_JARS[2] + ": " + e.getMessage());
+            System.err.println("[KRENO FPATCHER] Failed to load builtin jar " + TARGET_JARS[2] + ": " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -77,7 +77,7 @@ public class JarHijacker {
 
     private static Path extractToTemp(URL resource, String jarName) {
         try {
-            Path tempDir = Path.of(System.getProperty("java.io.tmpdir"), "fnp-patcher");
+            Path tempDir = Path.of(System.getProperty("java.io.tmpdir"), "KRENO FPATCHER");
             if (!Files.exists(tempDir)) {
                 Files.createDirectories(tempDir);
             }
@@ -85,11 +85,11 @@ public class JarHijacker {
             Path tempFile = tempDir.resolve(jarName);
 
             if (Files.exists(tempFile)) {
-                System.out.println("[FNP-Patcher] Using cached jar: " + tempFile);
+                System.out.println("[KRENO FPATCHER] Using cached jar: " + tempFile);
                 return tempFile;
             }
 
-            System.out.println("[FNP-Patcher] Extracting jar to: " + tempFile);
+            System.out.println("[KRENO FPATCHER] Extracting jar to: " + tempFile);
             try (var in = resource.openStream();
                  var out = Files.newOutputStream(tempFile)) {
                 byte[] buffer = new byte[8192];
@@ -101,11 +101,11 @@ public class JarHijacker {
 
             tempFile.toFile().deleteOnExit();
 
-            System.out.println("[FNP-Patcher] Successfully extracted builtin jar to: " + tempFile);
+            System.out.println("[KRENO FPATCHER] Successfully extracted builtin jar to: " + tempFile);
             return tempFile;
 
         } catch (Exception e) {
-            System.err.println("[FNP-Patcher] Failed to extract jar to temp: " + e.getMessage());
+            System.err.println("[KRENO FPATCHER] Failed to extract jar to temp: " + e.getMessage());
             e.printStackTrace();
             return null;
         }

@@ -1,4 +1,4 @@
-package one.pkg.fnp_patcher.util;
+package one.pkg.kreno_fpatcher.util;
 
 import io.netty.buffer.ByteBuf;
 

@@ -1,31 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "fnp_patcher",
+  "id": "kreno-fpatcher",
   "version": "${version}",
-  "name": "FNP Patcher",
+  "name": "KryptonReno's Fabric Patcher",
   "description": "Optimize the network and provide additional support for Krypton Fabric.",
   "authors": [
     "404"
   ],
   "contact": {
-    "issues": "https://github.com/404Setup/FNP-Patcher/issues",
-    "sources": "https://github.com/404Setup/FNP-Patcher",
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/kryptonfnp-patcher"
+    "issues": "https://github.com/404Setup/KryptonReno-Fabric/issues",
+    "sources": "https://github.com/404Setup/KryptonReno-Fabric",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/kreno-fpatcher"
   },
   "license": "LGPL-3.0",
-  "icon": "assets/fnp_patcher/icon.png",
+  "icon": "assets/kreno_fpatcher/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "one.pkg.fnp_patcher.ModMain"
+      "one.pkg.kreno_fpatcher.ModMain"
     ]
   },
   "mixins": [
-    "fnp_patcher.mixins.json"
+    "kreno-fpatcher.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": ">=${minecraft_version}"
   },
   "suggests": {

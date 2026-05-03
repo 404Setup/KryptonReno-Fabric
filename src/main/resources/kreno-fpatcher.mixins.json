@@ -1,10 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "one.pkg.fnp_patcher.mixin",
-  "refmap": "fnp_patcher.refmap.json",
-  "plugin": "one.pkg.fnp_patcher.mixin.ModMixinBootstrap",
-  "compatibilityLevel": "JAVA_21",
+  "package": "one.pkg.kreno_fpatcher.mixin",
+  "plugin": "one.pkg.kreno_fpatcher.mixin.ModMixinBootstrap",
+  "compatibilityLevel": "JAVA_25",
   "mixins": [
     "network.experimental.ServerLoginPacketListenerImplMixin",
     "network.experimental.ServerTextFilterMixin",
