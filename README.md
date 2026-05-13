@@ -7,7 +7,7 @@
 [![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/kreno-fpatcher)
 [![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/github_vector.svg)](https://github.com/404Setup/KryptonReno-Fabric)
 
-This is an extension mod for Krypton Fabric, ported from KryptonFNP.
+This is an extension mod for Krypton Fabric, ported from KryptonReno.
 
 ## Feature
 

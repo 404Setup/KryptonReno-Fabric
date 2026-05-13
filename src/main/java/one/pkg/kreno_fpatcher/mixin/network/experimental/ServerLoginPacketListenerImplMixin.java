@@ -74,7 +74,7 @@ public abstract class ServerLoginPacketListenerImplMixin {
                     LOGGER.info("UUID of player {} is {}", profile.name(), profile.id());
                     serverActivityMonitor.reportLoginActivity();
                     startClientVerification(profile);
-                } else if (server.isSingleplayer()) {
+                } else if (server.isSingleplayer() && connection.isSecureTransport()) {
                     LOGGER.warn("Failed to verify username but will let them in anyway!");
                     startClientVerification(UUIDUtil.createOfflineProfile(name));
                 } else {
@@ -82,7 +82,7 @@ public abstract class ServerLoginPacketListenerImplMixin {
                     LOGGER.error("Username '{}' tried to join with an invalid session", name);
                 }
             } catch (AuthenticationUnavailableException authenticationunavailableexception) {
-                if (server.isSingleplayer()) {
+                if (server.isSingleplayer() && connection.isSecureTransport()) {
                     LOGGER.warn("Authentication servers are down but will let them in anyway!");
                     startClientVerification(UUIDUtil.createOfflineProfile(name));
                 } else {
