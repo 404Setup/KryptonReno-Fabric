@@ -12,7 +12,6 @@
     "network.fix.Varint21FrameDecoderMixin"
   ],
   "client": [
-    "client.screen.MultiplayerOptionsScreenMixin",
     "network.experimental.ClientLoginMixin"
   ],
   "injectors": {
